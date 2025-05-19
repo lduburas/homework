@@ -1,10 +1,10 @@
-drop table if exists pi_iteration cascade;
+drop table if exists pi_iteration cascade constraints;
 
 create table pi_iteration (
-  iteration numeric,
-  sixteen_degree numeric,
-  eight_mult numeric,
-  addend numeric
+  iteration number,
+  sixteen_degree number,
+  eight_mult number,
+  addend number
 );
 
 insert into pi_iteration values (0, 1, 0, 0);

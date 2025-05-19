@@ -1,8 +1,8 @@
-drop table if exists age_class cascade;
+drop table if exists age_class cascade constraints;
 
 create table age_class (
-  age numeric(3),
-  description varchar(200)
+  age number(3),
+  description varchar2(200)
 );
 
 insert into age_class values (7, 'You are infant');

@@ -3,6 +3,6 @@ select
 from
   age_class ac
 where
-  age > 55 or age is NULL
+  age > 40 or age is NULL
 order by age asc
-limit 1
+fetch first 1 rows only;

@@ -13,7 +13,7 @@ create or replace package body sw_age as
     order by ac.age asc
     fetch first 1 rows only;
 
-    return l_description;
+    return 'You are ' || l_description;
   end get_age_description;
 end sw_age;
 /

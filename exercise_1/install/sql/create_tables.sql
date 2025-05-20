@@ -5,9 +5,9 @@ create table sw_age_class (
   description varchar2(200)
 );
 
-insert into sw_age_class values (7, 'You are infant');
-insert into sw_age_class values (18, 'You are schoolchild');
-insert into sw_age_class values (40, 'You are adult');
-insert into sw_age_class values (55, 'You are in middle-age');
-insert into sw_age_class values (NULL, 'You are aged');
+insert into sw_age_class values (7, 'infant');
+insert into sw_age_class values (18, 'schoolchild');
+insert into sw_age_class values (40, 'adult');
+insert into sw_age_class values (55, 'in middle-age');
+insert into sw_age_class values (NULL, 'aged');
 

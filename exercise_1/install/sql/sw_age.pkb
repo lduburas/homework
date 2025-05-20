@@ -1,13 +1,13 @@
 create or replace package body sw_age as
-  function get_age_description(p_age age_class.age%type) return age_class.description%type
+  function get_age_description(p_age sw_age_class.age%type) return sw_age_class.description%type
   is
-    l_description age_class.description%type;
+    l_description sw_age_class.description%type;
   begin
     select 
       ac.description
     into l_description
     from
-      age_class ac
+      sw_age_class ac
     where
       ac.age > p_age or ac.age is NULL
     order by ac.age asc

@@ -7,4 +7,3 @@ create table pi_iteration (
   addend number
 );
 
-insert into pi_iteration values (0, 1, 0, 0);

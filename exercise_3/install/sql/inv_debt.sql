@@ -1,5 +1,4 @@
-drop view if exists invoices_with_debt;
-create view invoices_with_debt
+create or replace view invoices_with_debt
 as
 select
   i.INVOICE_ID,

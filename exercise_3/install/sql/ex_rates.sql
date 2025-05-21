@@ -1,6 +1,4 @@
-drop view if exists ex_rates;
-
-create view ex_rates as
+create or replace view ex_rates as
 with
   days as (
     select 

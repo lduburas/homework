@@ -1,5 +1,4 @@
-drop view if exists inv_debt_rate;
-create view inv_debt_rate
+create or replace view inv_debt_rate
 as
 select
   i.INVOICE_ID,

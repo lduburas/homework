@@ -1,5 +1,6 @@
 create or replace function calc_pi(p_precision number) return number
 is
+  pragma autonomous_transaction;
   i number;
   pi_value number;
   rec pi_iteration%rowtype;

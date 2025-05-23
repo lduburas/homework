@@ -2,9 +2,9 @@ create or replace view invoices_with_debt
 as
 select
   i.INVOICE_ID,
-  i.INVOICE_AMOUNTS,
+  i.INVOICE_AMOUNT,
   pa.AMOUNT_PAYED,
-  i.INVOICE_AMOUNTS - pa.AMOUNT_PAYED as debt,
+  i.INVOICE_AMOUNT - pa.AMOUNT_PAYED as debt,
   i.CURRENCY
 from INVOICE i,
 (
@@ -16,4 +16,4 @@ from INVOICE i,
   group by p.INVOICE_ID, p.CURRENCY
 ) pa 
 where
-  i.INVOICE_ID = pa.INVOICE_ID and i.CURRENCY = pa.CURRENCY and (i.INVOICE_AMOUNTS > pa.AMOUNT_PAYED);
+  i.INVOICE_ID = pa.INVOICE_ID and i.CURRENCY = pa.CURRENCY and (i.INVOICE_AMOUNT > pa.AMOUNT_PAYED);

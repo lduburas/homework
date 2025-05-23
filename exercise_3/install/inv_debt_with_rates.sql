@@ -2,9 +2,9 @@ create or replace view inv_debt_rate
 as
 select
   i.INVOICE_ID,
-  i.INVOICE_AMOUNTS,
+  i.INVOICE_AMOUNT,
   pa.AMOUNT_PAYED,
-  i.INVOICE_AMOUNTS - pa.AMOUNT_PAYED as debt,
+  i.INVOICE_AMOUNT - pa.AMOUNT_PAYED as debt,
   i.CURRENCY
 from INVOICE i,
 (
@@ -27,4 +27,4 @@ from INVOICE i,
 ) pa 
 where
   i.INVOICE_ID = pa.INVOICE_ID and
-  (i.INVOICE_AMOUNTS > pa.AMOUNT_PAYED);
+  (i.INVOICE_AMOUNT > pa.AMOUNT_PAYED);

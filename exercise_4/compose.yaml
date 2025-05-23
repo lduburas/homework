@@ -12,6 +12,7 @@ services:
   backend:
     build: ./backend
     working_dir: /opt/app
+    env_file: "backend.env"
     ports:
       - 8080:8080
     volumes:

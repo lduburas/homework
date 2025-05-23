@@ -1,0 +1,19 @@
+services:
+  frontend:
+    build: ./frontend
+    user: "node"
+    working_dir: /home/node/app
+    ports:
+      - 5173:5173
+    volumes:
+      - ./frontend:/home/node/app
+    command: "tail -f /dev/null"
+    #command: "npm run dev"
+  backend:
+    build: ./backend
+    working_dir: /opt/app
+    ports:
+      - 8080:8080
+    volumes:
+      - ./backend:/opt/app
+    command: "tail -f /dev/null"

@@ -7,9 +7,14 @@ const createDefaultInvoice = () :Invoice => {
   return { date: new Date().toISOString().split('T')[0], amount: 0, currency: 'EUR'} ;
 }
 
+const invoice :Ref<Invoice>= ref(createDefaultInvoice())
+
 const invoices :Ref<Invoice[]>= ref([])
 
-const invoice :Ref<Invoice>= ref(createDefaultInvoice())
+const loadInvoices = async () => {
+  const url = `/services/invoices`
+  invoices.value = await (await fetch(url)).json()
+};
 
 function isValid() {
   return true;
@@ -32,11 +37,15 @@ const createInvoice = async () => {
   }
 }
 
+const deleteInvoice = async (id?: number) => {
+    const url = `/services/invoices`
+    await fetch(`${url}/${id}`, {
+      method: "DELETE"
+    })
+    loadInvoices();
+}
 
-const loadInvoices = async () => {
-  const url = `/services/invoices`
-  invoices.value = await (await fetch(url)).json()
-};
+
 loadInvoices();
 
 </script>
@@ -55,11 +64,13 @@ loadInvoices();
       </thead>
       <tbody>
         <tr v-for="invoice in invoices">
-          <td>{{invoice.id}}</td>
+          <td></td>
           <td>{{ new Date(invoice.date).toISOString().split('T')[0]}}</td>
           <td class="number">{{ invoice.amount }}</td>
           <td>{{ invoice.currency }}</td>
-          <td></td>
+          <td>
+            <button @click="() => deleteInvoice(invoice.id)">X</button>
+          </td>
         </tr>
         <tr>
           <td></td>
@@ -72,7 +83,7 @@ loadInvoices();
             </select>
           </td>
           <td>
-            <button @click="createInvoice">Add</button>
+            <button @click="createInvoice">Create Invoice</button>
           </td>
         </tr>
       </tbody>

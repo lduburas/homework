@@ -134,7 +134,7 @@ loadInvoices();
             </tr>
             <tr class="detail">
               <td></td>
-              <td><VueDatePicker v-model="payment.date" :format="formatDate"></VueDatePicker></td>
+              <td><VueDatePicker :id="paymentDate" v-model="payment.date" :format="formatDate"></VueDatePicker></td>
               <td><input class="number" v-model="payment.amount"></td>
               <td>
                 <select v-model="payment.currency">
@@ -168,14 +168,32 @@ loadInvoices();
 </template>
 
 <style scoped>
+
 .number {
   text-align: right;
 }
+
 .invoiceList {
   border-spacing: 0px;
 }
+
 .detail {
   background-color:darkslategray;
 }
 
+.invoiceList td {
+  padding: 3px;
+}
+
+#paymentDate #invoiceDate {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+</style>
+<style>
+:root {
+--dp-font-size: 13.333px;
+--dp-input-padding: 0px 30px 0px 12px;
+}
 </style>

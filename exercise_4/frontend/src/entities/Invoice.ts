@@ -1,6 +1,7 @@
 export interface Invoice {
+    open: boolean;
     id?: number;
-    date: string;
+    date: Date;
     amount: number;
     currency: string;
 }

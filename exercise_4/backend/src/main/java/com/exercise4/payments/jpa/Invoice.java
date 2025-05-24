@@ -5,7 +5,10 @@ import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
 
@@ -14,6 +17,8 @@ import lombok.Getter;
 @Getter
 public class Invoice {
     @Id
+    @SequenceGenerator(name = "INVOICE_SEQUENCE_GENERATOR", sequenceName = "INVOICE_SEQ", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "INVOICE_SEQUENCE_GENERATOR")
     @Column(name = "INVOICE_ID")
     Long id;
 

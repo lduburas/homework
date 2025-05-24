@@ -7,8 +7,7 @@ services:
       - 5173:5173
     volumes:
       - ./frontend:/home/node/app
-    command: "tail -f /dev/null"
-    #command: "npm run dev"
+    command: "npm run dev -- --host"
   backend:
     build: ./backend
     working_dir: /opt/app
@@ -17,4 +16,8 @@ services:
       - 8080:8080
     volumes:
       - ./backend:/opt/app
-    command: "tail -f /dev/null"
+    command: "./gradlew bootRun"
+  proxy:
+    build: ./proxy
+    ports:
+      - 80:80

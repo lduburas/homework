@@ -81,6 +81,23 @@ const createInvoice = async () => {
   }
 }
 
+const createPayment = async (invoiceId: number) => {
+  if (isValid()) {
+    const url = `/services/payments`
+    const body = JSON.stringify({ ...payment.value, invoiceId})
+    const newPayment = await (await fetch(url, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body 
+    })).json()
+    if (newPayment.id) {
+      payments.value.push(restPaymentToView(newPayment))
+    }
+  }
+}
+
 const deleteInvoice = async (id?: number) => {
     const url = `/services/invoices`
     await fetch(`${url}/${id}`, {
@@ -89,6 +106,13 @@ const deleteInvoice = async (id?: number) => {
     loadInvoices();
 }
 
+const deletePayment = async (payment: Payment) => {
+    const url = `/services/payments/${payment.id}`
+    await fetch(url, {
+      method: "DELETE"
+    })
+    loadPayments(payment.invoiceId);
+}
 
 loadInvoices();
 
@@ -129,12 +153,12 @@ loadInvoices();
               <td class="number">{{ payment.amount }}</td>
               <td>{{ payment.currency }}</td>
               <td>
-                <button @click="() => null">X</button>
+                <button @click="() => deletePayment(payment)">X</button>
               </td>
             </tr>
             <tr class="detail">
               <td></td>
-              <td><VueDatePicker :id="paymentDate" v-model="payment.date" :format="formatDate"></VueDatePicker></td>
+              <td><VueDatePicker v-model="payment.date" :format="formatDate"></VueDatePicker></td>
               <td><input class="number" v-model="payment.amount"></td>
               <td>
                 <select v-model="payment.currency">
@@ -143,7 +167,7 @@ loadInvoices();
                 </select>
               </td>
               <td>
-                <button @click="createPayment">Create Payment</button>
+                <button @click="() => { createPayment(invoice.id)} ">Create Payment</button>
               </td>
             </tr>
           </template>

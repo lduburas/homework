@@ -188,10 +188,14 @@ loadInvoices();
         </tr>
       </tbody>
     </table>
+    <div class="pushUp"></div>
   </main>
 </template>
 
 <style scoped>
+.pushUp {
+  margin: 100%;
+}
 
 .number {
   text-align: right;

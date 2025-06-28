@@ -3,8 +3,8 @@ as
 select
   i.INVOICE_ID,
   i.INVOICE_AMOUNT,
-  pa.AMOUNT_PAYED,
-  i.INVOICE_AMOUNT - pa.AMOUNT_PAYED as debt,
+  NVL(pa.AMOUNT_PAYED, 0) AMOUNT_PAYED,
+  i.INVOICE_AMOUNT - NVL(pa.AMOUNT_PAYED, 0) as debt,
   i.CURRENCY
 from INVOICE i,
 (
@@ -16,4 +16,4 @@ from INVOICE i,
   group by p.INVOICE_ID, p.CURRENCY
 ) pa 
 where
-  i.INVOICE_ID = pa.INVOICE_ID and i.CURRENCY = pa.CURRENCY and (i.INVOICE_AMOUNT > pa.AMOUNT_PAYED);
+  i.INVOICE_ID = pa.INVOICE_ID (+) and i.CURRENCY = pa.CURRENCY (+) and (i.INVOICE_AMOUNT > NVL(pa.AMOUNT_PAYED, 0));
